@@ -6,6 +6,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/nav" element={<SoundNav sounds={[]} />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="/wireframe" element={<Wireframe />}></Route>
       </Routes>
