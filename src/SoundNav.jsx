@@ -1,8 +1,15 @@
-function SoundNav(props) {
+function SoundNav() {
+  const sounds = [
+    { name: "1", path: "sounds/1.mp3" },
+    { name: "2", path: "sounds/2.mp3" },
+  ];
+
   return (
-    <select name="cars" id="cars">
-      {props.sounds.map((sound) => (
-        <option>{sound.name}</option>
+    <select>
+      {sounds.map((sound, i) => (
+        <option value={sound.path} key={`soundoption-${i}`}>
+          {sound.name}
+        </option>
       ))}
     </select>
   );
