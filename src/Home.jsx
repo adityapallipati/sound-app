@@ -102,6 +102,8 @@ function Home() {
           <a href="#">ABOUT</a>
         </div>
       </div>
+
+      <a href="/wireframe"><div id="wireframe-link"></div></a>
     </div>
   );
 }
