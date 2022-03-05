@@ -222,8 +222,10 @@ function Wireframe() {
         <audio id="player" src="" controls="controls">
           Your browser does not support the audio element.
         </audio>
-        <canvas id="out" />
+       <div id="out"></div>
+
       </div>
+
     </div>
   );
 }
