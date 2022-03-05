@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  font-family: Arial-Black;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; 
+  background-color: white;
+  overflow-x: none;
+
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+/* MAIN MENU */
+
+.dropbtn {
+  background-color: transparent;
+  color: white;
+  padding: 0px 5px;
+  font-size: 13vw;
+  border: none;
+}
+
+.dropdown {
+  position: absolute;
+  display: inline-block;
+  right: 5vw;
+  top: 1vw;
+  text-align: right;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  
+  min-width: 160px;
+  font-size: 3vw;
+  z-index: 10000;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 0vw 0vw 5vw;
+  text-decoration: none;
+  text-align: left;
+  display: block;
+
+}
+
+.dropdown-content a:hover {color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.drpbtn:hover {color: #ddd;}
