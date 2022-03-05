@@ -115,7 +115,7 @@ function onWindowResize() {
             </div>
       </div>
 
-      <div id="wireframe"></div>
+      <a href=""><div id="wireframe"></div></a>
           
     </div>
   );
