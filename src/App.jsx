@@ -114,6 +114,8 @@ function onWindowResize() {
               <a href="#">ABOUT</a>
             </div>
       </div>
+
+      <div id="wireframe"></div>
           
     </div>
   );

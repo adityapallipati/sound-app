@@ -56,3 +56,13 @@ code {
 .dropdown:hover .dropdown-content {display: block;}
 
 .drpbtn:hover {color: #ddd;}
+
+/* Wireframe Link */
+
+#wireframe {
+  background-color: red;
+  position: absolute;
+  top: 20vw;
+  height: 20px;
+  width: 20px;
+}
