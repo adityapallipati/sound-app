@@ -2,9 +2,10 @@ import * as dat from "dat.gui";
 import { useEffect } from "react";
 import * as THREE from "three";
 
+
 function Home() {
   useEffect(() => {
-    const gui = new dat.GUI();
+
 
     const texture = new THREE.TextureLoader();
 
@@ -18,7 +19,6 @@ function Home() {
     );
     camera.position.z = 96;
 
-    gui.add(camera.position, "y").min(-200).max(0);
 
     const canvas = document.getElementById("myThreeJsCanvas");
     const renderer = new THREE.WebGLRenderer({
@@ -30,6 +30,8 @@ function Home() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
+    // lights
+
     const ambientLight = new THREE.AmbientLight(0xaaaaaa, 0.5);
     ambientLight.castShadow = true;
     scene.add(ambientLight);
@@ -39,18 +41,47 @@ function Home() {
     spotLight.position.set(-10, 40, 20);
     scene.add(spotLight);
 
+    const light = new THREE.SpotLight(0xffffff, .9);
+    light.castShadow = true;
+    light.lookAt(scene);
+    light.position.set(-40, -100, 200);
+    scene.add(light);
+
+    // textures
+
+  
+
+    // geometry and materials
+
     const icosahedronGeometry = new THREE.IcosahedronGeometry(18, 20);
     const lambertMaterial = new THREE.MeshLambertMaterial({
       color: 0xffffff,
-      wireframe: true,
+      wireframe: true
     });
+
+  
+
+    const dodecahedronGeometry = new THREE.DodecahedronGeometry(18, 0);
+    const color = THREE.MathUtils.randInt(0, 0xffffff)
+    
+    const phongMaterial = new THREE.MeshStandardMaterial({
+      color: color,
+      wireframe: false
+    
+    });
+
+
+
+    
+    // sphere objects
 
     const ball = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
 
     ball.position.set(0, 18, 0);
     group.add(ball);
 
-    const ball2 = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
+   
+    const ball2 = new THREE.Mesh(dodecahedronGeometry, phongMaterial);
 
     ball2.position.y = -23;
     group.add(ball2);
@@ -65,7 +96,11 @@ function Home() {
     ball4.position.y = -112;
     group.add(ball4);
 
+    // final group
+
     scene.add(group);
+
+    // resize function
 
     window.addEventListener("resize", onWindowResize, false);
     function onWindowResize() {
@@ -73,22 +108,72 @@ function Home() {
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
+
+     // mouse 
+
+     window.addEventListener("wheel", onMouseWheel)
+
+     let y = 0
+     let position = 0
+ 
+     function onMouseWheel(event){
+       y = event.deltaY * 0.07;
+
+      
+     }
+ 
+
+    //tick
+
+    const clock = new THREE.Clock();
+
+    // animation and render
+
     const animate = () => {
+
+      const elapsedTime = clock.getElapsedTime();
+
+
+      // camera update
+      position -= y;
+      y *= .9;
+
+      //fix this too jumpy
+      if (y <= 0) {
+        position = y;
+        y *= .01;
+      }
+
+      if (y <= -9) {
+        position = y;
+        y *= 0.9;
+      }
+
+      
+
+
+      camera.position.y = position;
+
+      // animations 
+
       ball.rotation.x += 0.001;
       ball.rotation.y += 0.001;
 
-      ball2.rotation.x += 0.003;
-      ball2.rotation.y += 0.0001;
+      ball2.rotation.x += 0.01;
+      ball2.rotation.y += 0.01;
 
       ball3.rotation.x += 0.01;
       ball3.rotation.y += 0.004;
 
       ball4.rotation.x += 0.001;
 
+    
       renderer.render(scene, camera);
       window.requestAnimationFrame(animate);
     };
     animate();
+
+    
   }, []);
 
   return (
