@@ -1,6 +1,6 @@
 import * as dat from "dat.gui";
 import { useEffect } from "react";
-import * as THREE from "three";
+import * as THREE from "three-old";
 import SimplexNoise from "simplex-noise";
 
 function Wireframe() {
@@ -127,6 +127,7 @@ function Wireframe() {
         }
 
         function makeRoughBall(mesh, bassFr, treFr) {
+        
           mesh.geometry.vertices.forEach(function (vertex, i) {
             var offset = mesh.geometry.parameters.radius;
             var amp = 7;
@@ -151,6 +152,7 @@ function Wireframe() {
           mesh.geometry.computeFaceNormals();
         }
 
+        var geometry = new THREE.Geometry().fromBufferGeometry( bufferGeometry );
         function makeRoughGround(mesh, distortionFr) {
           mesh.geometry.vertices.forEach(function (vertex, i) {
             var amp = 2;
@@ -208,6 +210,7 @@ function Wireframe() {
 
   return (
     <div>
+
       <div id="content">
         <label htmlFor="selection" className="file">
           Listen:
