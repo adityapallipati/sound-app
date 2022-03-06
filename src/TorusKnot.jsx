@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import * as THREE from "three-old";
 import SimplexNoise from "simplex-noise";
 
-function Wireframe() {
+
+function TorusKnot() {
   useEffect(() => {
     //initialise simplex noise instance
     var noise = new SimplexNoise();
@@ -12,7 +13,7 @@ function Wireframe() {
     var vizInit = function () {
       var file = document.getElementById("selection");
       var audio = document.getElementById("player");
-      var fileLabel = document.querySelector("label.file");
+      var fileLabel = document.querySelector("label.file"); 
 
       document.onload = function (e) {
         console.log(e);
@@ -48,7 +49,7 @@ function Wireframe() {
           0.1,
           1000
         );
-        camera.position.set(0, 0, 100);
+        camera.position.set(0, 0, 150);
         camera.lookAt(scene.position);
         scene.add(camera);
 
@@ -58,25 +59,35 @@ function Wireframe() {
         });
         renderer.setSize(window.innerWidth, window.innerHeight);
 
-        var icosahedronGeometry = new THREE.IcosahedronGeometry(10, 4);
-        var lambertMaterial = new THREE.MeshLambertMaterial({
-          color: 0xffffff,
-          wireframe: true,
+        const torusGeometry = new THREE.TorusKnotGeometry(10.659, 4.6431, 300, 20, 20, 3)
+        const basicMaterial = new THREE.MeshPhysicalMaterial({
+          color: 0xFFFF00,
+          wireframe: true
         });
 
-        var ball = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
+        var ball = new THREE.Mesh(torusGeometry, basicMaterial);
         ball.position.set(0, 0, 0);
         group.add(ball);
 
-        var ambientLight = new THREE.AmbientLight(0xaaaaaa);
+        const ambientLight = new THREE.AmbientLight(0xaaaaaa, 0.5);
+        ambientLight.castShadow = true;
         scene.add(ambientLight);
-
-        var spotLight = new THREE.SpotLight(0xffffff);
-        spotLight.intensity = 0.9;
-        spotLight.position.set(-10, 40, 20);
-        spotLight.lookAt(ball);
+    
+        const spotLight = new THREE.SpotLight(0xffffff, 1);
         spotLight.castShadow = true;
+        spotLight.position.set(-10, 40, 20);
         scene.add(spotLight);
+    
+        const light = new THREE.SpotLight(0xffffff, .9);
+        light.castShadow = true;
+        light.lookAt(scene);
+        light.position.set(-40, -1000, 200);
+        scene.add(light);
+
+        
+
+  
+
 
         //var orbitControls = new THREE.OrbitControls(camera, renderer.domElement);
         //orbitControls.autoRotate = true;
@@ -116,6 +127,7 @@ function Wireframe() {
           );
 
           group.rotation.y += 0.005;
+
           renderer.render(scene, camera);
           requestAnimationFrame(render);
         }
@@ -240,4 +252,4 @@ function Wireframe() {
   );
 }
 
-export default Wireframe;
+export default TorusKnot;

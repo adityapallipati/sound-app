@@ -60,11 +60,74 @@ code {
 /* Wireframe Link */
 
 #wireframe-link {
-  background-color: red;
+  background-color: transparent;
   position: absolute;
-  top: 20vw;
+  top: 25vw;
+  left: 35vw;
   height: 20px;
   width: 20px;
+}
+
+#wireframe-link:hover {
+  color: red;
+}
+
+#isohedron-link{
+  background-color: transparent;
+  position: absolute;
+  top: 70vw;
+  left: 35vw;
+  height: 20px;
+  width: 20px;
+}
+
+#isohedron-link:hover {
+  color: red;
+}
+
+#torus-link{
+  background-color: transparent;
+  position: absolute;
+  top: 120vw;
+  left: 34vw;
+  height: 20px;
+  width: 20px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+#isohedron-link:hover {
+  color: red;
+}
+
+#torus-link{
+  background-color: transparent;
+  position: absolute;
+  top: 120vw;
+  left: 34vw;
+  height: 20px;
+  width: 20px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+#torus-link:hover {
+  color: red;
+}
+
+#octohedron-link{
+  background-color: transparent;
+  position: absolute;
+  top: 170vw;
+  left: 34vw;
+  height: 20px;
+  width: 20px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+#octohedron-link:hover {
+  color: red;
 }
 
 /* Wireframe Modulation */
@@ -127,3 +190,4 @@ label.file.normal{
   left: 0;
 }
 
+/* ALTER CSS FOR LARGER VIEW - LABELS ARE OFFSET CURRENTLY*/

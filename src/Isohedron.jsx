@@ -3,7 +3,9 @@ import { useEffect } from "react";
 import * as THREE from "three-old";
 import SimplexNoise from "simplex-noise";
 
-function Wireframe() {
+// randomize colors
+
+function Isohedron() {
   useEffect(() => {
     //initialise simplex noise instance
     var noise = new SimplexNoise();
@@ -12,7 +14,7 @@ function Wireframe() {
     var vizInit = function () {
       var file = document.getElementById("selection");
       var audio = document.getElementById("player");
-      var fileLabel = document.querySelector("label.file");
+      var fileLabel = document.querySelector("label.file"); 
 
       document.onload = function (e) {
         console.log(e);
@@ -48,7 +50,7 @@ function Wireframe() {
           0.1,
           1000
         );
-        camera.position.set(0, 0, 100);
+        camera.position.set(0, 0, 150);
         camera.lookAt(scene.position);
         scene.add(camera);
 
@@ -58,25 +60,41 @@ function Wireframe() {
         });
         renderer.setSize(window.innerWidth, window.innerHeight);
 
-        var icosahedronGeometry = new THREE.IcosahedronGeometry(10, 4);
-        var lambertMaterial = new THREE.MeshLambertMaterial({
-          color: 0xffffff,
-          wireframe: true,
+        const dodecahedronGeometry = new THREE.DodecahedronGeometry(18, 0);
+        const phongMaterial = new THREE.MeshStandardMaterial({
+          color: 0xFFFF00,
+          wireframe: false,
+          opacity: 0.5
+        
         });
 
-        var ball = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
+        var ball = new THREE.Mesh(dodecahedronGeometry, phongMaterial);
         ball.position.set(0, 0, 0);
         group.add(ball);
 
-        var ambientLight = new THREE.AmbientLight(0xaaaaaa);
+        const ambientLight = new THREE.AmbientLight(0xaaaaaa, 0.5);
+        ambientLight.castShadow = true;
         scene.add(ambientLight);
-
-        var spotLight = new THREE.SpotLight(0xffffff);
-        spotLight.intensity = 0.9;
-        spotLight.position.set(-10, 40, 20);
-        spotLight.lookAt(ball);
+    
+        const spotLight = new THREE.SpotLight(0xffffff, 1);
         spotLight.castShadow = true;
+        spotLight.position.set(-190, 40, 20);
         scene.add(spotLight);
+    
+        const light = new THREE.SpotLight(0xffffff, .9);
+        light.castShadow = true;
+        light.lookAt(scene);
+        light.position.set(-40, -10, 2000);
+        scene.add(light);
+
+        const hemiLight = new THREE.HemisphereLight(0xaaaaaa, 10);
+        hemiLight.position.set(-10,100,100);
+        scene.add(hemiLight);
+
+        const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+        group.add( directionalLight );
+  
+
 
         //var orbitControls = new THREE.OrbitControls(camera, renderer.domElement);
         //orbitControls.autoRotate = true;
@@ -116,6 +134,7 @@ function Wireframe() {
           );
 
           group.rotation.y += 0.005;
+
           renderer.render(scene, camera);
           requestAnimationFrame(render);
         }
@@ -213,7 +232,7 @@ function Wireframe() {
       <div className="dropdown">
         <button className="dropbtn">+</button>
         <div className="dropdown-content">
-        <a href="/">HOME</a>
+          <a href="/">HOME</a>
           <a href="/sounds">SOUNDS</a>
           <a href="/about">ABOUT</a>
         </div>
@@ -240,4 +259,4 @@ function Wireframe() {
   );
 }
 
-export default Wireframe;
+export default Isohedron;

@@ -3,12 +3,12 @@ import { useEffect } from "react";
 import * as THREE from "three";
 
 
+
 function Home() {
   useEffect(() => {
 
 
     const texture = new THREE.TextureLoader();
-
     const scene = new THREE.Scene();
     const group = new THREE.Group();
     const camera = new THREE.PerspectiveCamera(
@@ -19,7 +19,6 @@ function Home() {
     );
     camera.position.z = 96;
 
-
     const canvas = document.getElementById("myThreeJsCanvas");
     const renderer = new THREE.WebGLRenderer({
       canvas,
@@ -29,6 +28,8 @@ function Home() {
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
+
+
 
     // lights
 
@@ -44,8 +45,9 @@ function Home() {
     const light = new THREE.SpotLight(0xffffff, .9);
     light.castShadow = true;
     light.lookAt(scene);
-    light.position.set(-40, -100, 200);
+    light.position.set(-40, -1000, 200);
     scene.add(light);
+
 
     // textures
 
@@ -59,20 +61,27 @@ function Home() {
       wireframe: true
     });
 
-  
-
     const dodecahedronGeometry = new THREE.DodecahedronGeometry(18, 0);
     const color = THREE.MathUtils.randInt(0, 0xffffff)
-    
     const phongMaterial = new THREE.MeshStandardMaterial({
       color: color,
       wireframe: false
     
     });
-
-
-
     
+    const torusGeometry = new THREE.TorusKnotGeometry(10.659, 4.6431, 300, 20, 20, 3)
+    const basicMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0xFFFF00,
+      wireframe: true
+    });
+
+    const octoGeometry = new THREE.OctahedronGeometry(20, 2);
+    const octoMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0x0000FF,
+      wireframe: false
+    })
+    
+
     // sphere objects
 
     const ball = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
@@ -86,15 +95,26 @@ function Home() {
     ball2.position.y = -23;
     group.add(ball2);
 
-    const ball3 = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
+    const ball3 = new THREE.Mesh(torusGeometry, basicMaterial);
 
     ball3.position.y = -66;
     group.add(ball3);
 
-    const ball4 = new THREE.Mesh(icosahedronGeometry, lambertMaterial);
+
+    const ball4 = new THREE.Mesh(octoGeometry, octoMaterial);
 
     ball4.position.y = -112;
     group.add(ball4);
+
+    /* Adding wireframe to the torus */
+    const wireframe = new THREE.WireframeGeometry( octoGeometry );
+    const wireframeMaterial = new THREE.MeshBasicMaterial({color: 0x00000})
+    const line = new THREE.LineSegments( wireframe );
+    line.material.depthTest = false;
+    line.material.opacity = 1;
+    line.material.transparent = true;
+    
+    ball4.add( line );
 
     // final group
 
@@ -109,7 +129,10 @@ function Home() {
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-     // mouse 
+    // hyperlink
+
+
+    // mouse 
 
      window.addEventListener("wheel", onMouseWheel)
 
@@ -117,9 +140,7 @@ function Home() {
      let position = 0
  
      function onMouseWheel(event){
-       y = event.deltaY * 0.07;
-
-      
+       y = event.deltaY * 0.007;
      }
  
 
@@ -136,23 +157,12 @@ function Home() {
 
       // camera update
       position -= y;
-      y *= .9;
+      y *= .5;
+      camera.position.y = position;
 
       //fix this too jumpy
-      if (y <= 0) {
-        position = y;
-        y *= .01;
-      }
-
-      if (y <= -9) {
-        position = y;
-        y *= 0.9;
-      }
-
-      
-
-
-      camera.position.y = position;
+     
+    
 
       // animations 
 
@@ -165,7 +175,8 @@ function Home() {
       ball3.rotation.x += 0.01;
       ball3.rotation.y += 0.004;
 
-      ball4.rotation.x += 0.001;
+      ball4.rotation.x += 0.01;
+
 
     
       renderer.render(scene, camera);
@@ -182,13 +193,18 @@ function Home() {
       <div className="dropdown">
         <button className="dropbtn">+</button>
         <div className="dropdown-content">
-          <a href="#">SOUNDS</a>
-          <a href="#">HOME</a>
-          <a href="#">ABOUT</a>
+          <a href="/">HOME</a>
+          <a href="/sounds">SOUNDS</a>
+          <a href="/about">ABOUT</a>
         </div>
       </div>
 
-      <a href="/wireframe"><div id="wireframe-link"></div></a>
+
+      <a href="/wireframe"><div id="wireframe-link">WIREFRAME</div></a>
+      <a href="/isohedron"><div id="isohedron-link">ISOHEDRON</div></a>
+      <a href="/torusknot"><div id="torus-link">TORUS-KNOT</div></a>
+      <a href="/octohedron"><div id="octohedron-link">OCTOHEDRON</div></a>
+
     </div>
   );
 }
