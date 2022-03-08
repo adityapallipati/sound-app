@@ -126,7 +126,8 @@ function TorusKnot() {
             modulate(upperAvgFr, 0, 1, 0, 4)
           );
 
-          group.rotation.y += 0.005;
+          group.rotation.x += 0.01;
+          group.rotation.y += 0.004;
 
           renderer.render(scene, camera);
           requestAnimationFrame(render);

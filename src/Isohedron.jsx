@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import * as THREE from "three-old";
 import SimplexNoise from "simplex-noise";
 
+
 // randomize colors
 
 function Isohedron() {
@@ -60,11 +61,12 @@ function Isohedron() {
         });
         renderer.setSize(window.innerWidth, window.innerHeight);
 
-        const dodecahedronGeometry = new THREE.DodecahedronGeometry(18, 0);
-        const phongMaterial = new THREE.MeshStandardMaterial({
-          color: 0xFFFF00,
+        const dodecahedronGeometry = new THREE.DodecahedronGeometry(20, 0);
+   
+        const phongMaterial = new THREE.MeshPhongMaterial({
+          color: 0x800000,
           wireframe: false,
-          opacity: 0.5
+          fog: true
         
         });
 
@@ -78,21 +80,14 @@ function Isohedron() {
     
         const spotLight = new THREE.SpotLight(0xffffff, 1);
         spotLight.castShadow = true;
-        spotLight.position.set(-190, 40, 20);
+        spotLight.position.set(-10, -400, 20);
         scene.add(spotLight);
     
         const light = new THREE.SpotLight(0xffffff, .9);
         light.castShadow = true;
         light.lookAt(scene);
-        light.position.set(-40, -10, 2000);
+        light.position.set(-40, 1000, 200);
         scene.add(light);
-
-        const hemiLight = new THREE.HemisphereLight(0xaaaaaa, 10);
-        hemiLight.position.set(-10,100,100);
-        scene.add(hemiLight);
-
-        const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-        group.add( directionalLight );
   
 
 
@@ -235,6 +230,7 @@ function Isohedron() {
           <a href="/">HOME</a>
           <a href="/sounds">SOUNDS</a>
           <a href="/about">ABOUT</a>
+          
         </div>
       </div>
       <div id="content">

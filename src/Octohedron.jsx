@@ -68,15 +68,10 @@ function Octohedron() {
         ball.position.set(0, 0, 0);
         group.add(ball);
 
-        /* Adding wireframe to the torus */
-        const wireframe = new THREE.WireframeGeometry( octoGeometry );
-        const wireframeMaterial = new THREE.MeshBasicMaterial({color: 0x00000})
-        const line = new THREE.LineSegments( wireframe );
-        line.material.depthTest = false;
-        line.material.opacity = 1;
-        line.material.transparent = true;
-        
-        group.add( line );
+
+        const hemiLight = new THREE.HemisphereLight(0xaaaaaa, 5);
+        hemiLight.position.set(-100,100,1000);
+        group.add(hemiLight);
 
         const ambientLight = new THREE.AmbientLight(0xaaaaaa, 0.5);
         ambientLight.castShadow = true;
@@ -132,7 +127,7 @@ function Octohedron() {
             modulate(upperAvgFr, 0, 1, 0, 4)
           );
 
-          group.rotation.y += 0.005;
+          group.rotation.x += 0.009;;
 
           renderer.render(scene, camera);
           requestAnimationFrame(render);
@@ -143,6 +138,7 @@ function Octohedron() {
           camera.updateProjectionMatrix();
           renderer.setSize(window.innerWidth, window.innerHeight);
         }
+// modulate object
 
         function makeRoughBall(mesh, bassFr, treFr) {
         
@@ -190,6 +186,8 @@ function Octohedron() {
           mesh.geometry.computeVertexNormals();
           mesh.geometry.computeFaceNormals();
         }
+
+        
 
         audio.play();
       }

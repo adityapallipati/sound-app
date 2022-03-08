@@ -191,3 +191,88 @@ label.file.normal{
 }
 
 /* ALTER CSS FOR LARGER VIEW - LABELS ARE OFFSET CURRENTLY*/
+
+#footer {
+display: none;
+}
+
+
+#logo {
+  position: absolute;
+  font-size: 15vw;
+  top:1vw;
+  text-align: center;
+  left: 30vw;
+}
+
+#footer-container {
+  background: transparent;
+  height: 10vw;
+  width: 100%;
+  position: absolute;
+  bottom: 0vw;
+  text-align: center;
+  font-size: 3vw;
+  overflow-x: scroll;
+  overflow-y: none;
+  white-space: nowrap;
+}
+
+@media screen and (min-width: 800px) {
+  #logo {
+    font-size: 10vw;
+    position: absolute;
+    top: 1vw;
+    text-align: center;
+    left: 1vw;
+  }
+
+  #footer-container {
+   display: none;
+  }
+
+  #footer {
+    position: absolute;
+    display: block;
+    top: 13vw;
+    left: 2vw;
+    
+  }
+
+  /* MAIN MENU */
+
+.dropbtn {
+  background-color: transparent;
+  color: white;
+  padding: 0px 5px;
+  font-size: 13vw;
+  border: none;
+}
+
+.dropdown {
+  position: absolute;
+  display: inline-block;
+  right: 10vw;
+  top: -4vw;
+  text-align: right;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  font-size: 3vw;
+  z-index: 10000;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 0vw 0vw 0vw;
+  text-decoration: none;
+  text-align: left;
+  display: block;
+
+}
+
+}
+

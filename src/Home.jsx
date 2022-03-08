@@ -62,9 +62,8 @@ function Home() {
     });
 
     const dodecahedronGeometry = new THREE.DodecahedronGeometry(18, 0);
-    const color = THREE.MathUtils.randInt(0, 0xffffff)
     const phongMaterial = new THREE.MeshStandardMaterial({
-      color: color,
+      color: 0x800000,
       wireframe: false
     
     });
@@ -106,15 +105,7 @@ function Home() {
     ball4.position.y = -112;
     group.add(ball4);
 
-    /* Adding wireframe to the torus */
-    const wireframe = new THREE.WireframeGeometry( octoGeometry );
-    const wireframeMaterial = new THREE.MeshBasicMaterial({color: 0x00000})
-    const line = new THREE.LineSegments( wireframe );
-    line.material.depthTest = false;
-    line.material.opacity = 1;
-    line.material.transparent = true;
-    
-    ball4.add( line );
+
 
     // final group
 
@@ -175,7 +166,7 @@ function Home() {
       ball3.rotation.x += 0.01;
       ball3.rotation.y += 0.004;
 
-      ball4.rotation.x += 0.01;
+      ball4.rotation.x += 0.009;
 
 
     
@@ -189,6 +180,7 @@ function Home() {
 
   return (
     <div>
+      
       <canvas id="myThreeJsCanvas" />
       <div className="dropdown">
         <button className="dropbtn">+</button>
@@ -196,16 +188,27 @@ function Home() {
           <a href="/">HOME</a>
           <a href="/sounds">SOUNDS</a>
           <a href="/about">ABOUT</a>
+          
         </div>
       </div>
+<div id="logo"><h1>SD-S</h1></div>
+    <footer id="footer">
+      <a href="/wireframe"> WIREFRAME </a> <br></br>
+      <a href="/isohedron">  ISOHEDRON </a> <br></br>
+      <a href="/torusknot"> TORUS-KNOT </a> <br></br>
+      <a href="/octohedron"> OCTOHEDRON </a> <br></br>
+    </footer>
 
+    <div id="footer-container">
 
-      <a href="/wireframe"><div id="wireframe-link">WIREFRAME</div></a>
-      <a href="/isohedron"><div id="isohedron-link">ISOHEDRON</div></a>
-      <a href="/torusknot"><div id="torus-link">TORUS-KNOT</div></a>
-      <a href="/octohedron"><div id="octohedron-link">OCTOHEDRON</div></a>
+    <a className="mx-1" href="/wireframe"> WIREFRAME </a> 
+    <a href="/isohedron">  ISOHEDRON </a> 
+    <a href="/torusknot"> TORUS-KNOT </a>
+    <a href="/octohedron"> OCTOHEDRON </a> 
 
     </div>
+    </div>
+
   );
 }
 

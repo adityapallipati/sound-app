@@ -1,13 +1,12 @@
 import * as dat from "dat.gui";
 import { useEffect } from "react";
 import * as THREE from "three";
+import React, { useRef, useState } from "react";
 
 
 
 function Sounds() {
   useEffect(() => {
-
-
 
     
   }, []);
@@ -25,7 +24,12 @@ function Sounds() {
       </div>
 
 
+
  <h1 className="text-center">EDIT THIS PAGE LATER</h1>
+
+ <div id="audio-playlist">
+   <audio src="src/sounds/1.mp3" controls autoplay="false"></audio>
+ </div>
     </div>
   );
 }

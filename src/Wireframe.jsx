@@ -115,7 +115,8 @@ function Wireframe() {
             modulate(upperAvgFr, 0, 1, 0, 4)
           );
 
-          group.rotation.y += 0.005;
+          group.rotation.x += 0.001;
+          group.rotation.y += 0.001;
           renderer.render(scene, camera);
           requestAnimationFrame(render);
         }
